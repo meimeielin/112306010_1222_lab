@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="#">
+        <img id="die1" src="die1.png" alt="blank">
+        <img id="die2" src="die1.png" alt="blank">
+        <img id="die3" src="die1.png" alt="blank">
+        <img id="die4" src="die1.png" alt="blank">
+        <img id="die5" src="die1.png" alt="blank">
+        <img id="die6" src="die1.png" alt="blank">
+        <img id="die7" src="die1.png" alt="blank">
+        <img id="die8" src="die1.png" alt="blank">
+        <img id="die9" src="die1.png" alt="blank">
+        <img id="die10" src="die1.png" alt="blank">
+        <img id="die11" src="die1.png" alt="blank">
+        <img id="die12" src="die1.png" alt="blank">
+    </form>
+
+    <div>
+        <table>
+            <tr>
+                <th>Dice Face</th>
+                <th>Probability(%)</th>
+            </tr>
+
+            <tr id="face1">
+                <td>1</td>
+                <td id="pro1">0%</td>
+            </tr>
+            <tr id="face2">
+                <td>2</td>
+                <td id="pro2">0%</td>
+            </tr>
+            <tr id="face3">
+                <td>3</td>
+                <td id="pro3">0%</td>
+            </tr>
+            <tr id="face4">
+                <td>4</td>
+                <td id="pro4">0%</td>
+            </tr>
+            <tr id="face5">
+                <td>5</td>
+                <td id="pro5">0%</td>
+            </tr>
+            <tr id="face6">
+                <td>6</td>
+                <td id="pro6">0%</td>
+            </tr>
+        </table>
+    </div>
+
+    <input id="rollButton" type="button" value="Roll Dice">
+
+    <script>
+        var die1Image, die2Image, die3Image, die4Image, die5Image, die6Image, die7Image, die8Image, die9Image, die10Image, die11Image, die12Image;
+        var prob1, prob2, prob3, prob4, prob5, prob6;
+
+        function start() {
+            var button = document.getElementById("rollButton");
+            button.addEventListener("click", rollDice);
+            die1Image = document.getElementById("die1");
+            die2Image = document.getElementById("die2");
+            die3Image = document.getElementById("die3");
+            die4Image = document.getElementById("die4");
+            die5Image = document.getElementById("die5");
+            die6Image = document.getElementById("die6");
+            die7Image = document.getElementById("die7");
+            die8Image = document.getElementById("die8");
+            die9Image = document.getElementById("die9");
+            die10Image = document.getElementById("die10");
+            die11Image = document.getElementById("die11");
+            die12Image = document.getElementById("die12");
+            prob1 = document.getElementById("pro1");
+            prob2 = document.getElementById("pro2");
+            prob3 = document.getElementById("pro3");
+            prob4 = document.getElementById("pro4");
+            prob5 = document.getElementById("pro5");
+            prob6 = document.getElementById("pro6");
+        }
+
+        function rollDice() {
+            var counters = [0, 0, 0, 0, 0, 0];
+            var prob = [0, 0, 0, 0, 0, 0];
+
+            updateCounter(die1Image, counters, prob);
+            updateCounter(die2Image, counters, prob);
+            updateCounter(die3Image, counters, prob);
+            updateCounter(die4Image, counters, prob);
+            updateCounter(die5Image, counters, prob);
+            updateCounter(die6Image, counters, prob);
+            updateCounter(die7Image, counters, prob);
+            updateCounter(die8Image, counters, prob);
+            updateCounter(die9Image, counters, prob);
+            updateCounter(die10Image, counters, prob);
+            updateCounter(die11Image, counters, prob);
+            updateCounter(die12Image, counters, prob);
+
+            updateTable(prob1, prob[0]);
+            updateTable(prob2, prob[1]);
+            updateTable(prob3, prob[2]);
+            updateTable(prob4, prob[3]);
+            updateTable(prob5, prob[4]);
+            updateTable(prob6, prob[5]);
+        }
+
+        function updateCounter(dieImg, counters, prob) {
+            var dieValue = Math.floor(1 + Math.random() * 6);
+            dieImg.setAttribute("src", "die" + dieValue + ".png");
+            dieImg.setAttribute("alt", "die image with " + dieValue + " spot(s)");
+            counters[dieValue - 1]++;
+            prob[dieValue - 1] = (counters[dieValue - 1] / 12 * 100).toFixed(2) + "%";
+        }
+
+        function updateTable(probElement, prob) {
+            probElement.textContent = prob;
+        }
+
+        window.addEventListener("load", start);
+    </script>
+
+</body>
+
+</html>
